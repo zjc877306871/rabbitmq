@@ -17,6 +17,11 @@ public class DirectProducter {
         //声明链接工厂
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("106.14.139.151");
+        /** 以下是为了配置自定义的虚拟主机/用户/密码*/
+        connectionFactory.setUsername("tom");
+        connectionFactory.setPassword("123456");
+        connectionFactory.setVirtualHost("enjoyedu");
+        /** 以下是为了配置自定义的虚拟主机/用户/密码*/
         //获取链接
         Connection connection = connectionFactory.newConnection();
         //创建信道
@@ -25,7 +30,7 @@ public class DirectProducter {
         channel.exchangeDeclare(EXCHAGE_NAME, BuiltinExchangeType.DIRECT);
         //创建路由键和消息体
         String[] routKeys = {"cat", "dog", "rabbit"};
-        for(int i=0; i<30; i++){
+        for(int i=0; i<300000; i++){
             String routKey = routKeys[i%3];
             String msg = "helllo rabbit " + i;
             //发布消息
